@@ -1,10 +1,7 @@
 package codes.smit.quicknote;
 
+import codes.smit.quicknote.command.*;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import codes.smit.quicknote.command.NoteCommand;
-import codes.smit.quicknote.command.ViewNoteCommand;
-import codes.smit.quicknote.command.ClearNotesCommand;
-import codes.smit.quicknote.command.TestCommand;
 
 import net.fabricmc.api.ModInitializer;
 
@@ -30,6 +27,7 @@ public class QuickNote implements ModInitializer {
 			NoteCommand.register(dispatcher);
 			ViewNoteCommand.register(dispatcher);
 			ClearNotesCommand.register(dispatcher);
+			ExportNotesCommand.register(dispatcher);
 			TestCommand.register(dispatcher);
 		});
 	}

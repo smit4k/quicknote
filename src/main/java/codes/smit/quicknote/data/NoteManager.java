@@ -4,6 +4,9 @@ import codes.smit.quicknote.command.Note;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
@@ -12,6 +15,7 @@ public class NoteManager {
     private static final Gson GSON = new Gson();
     private static Map<UUID, List<Note>> notes = new HashMap<>();
     private static File file;
+    private static final Path NOTES_FILE_PATH = Paths.get("config", "quicknote", "notes.json");
 
     public static void init(File configDir) {
         file = new File(configDir, "notes.json");
@@ -52,6 +56,12 @@ public class NoteManager {
         notes.remove(uuid);
         save();
     }
+
+    public static Path getNotesFilePath() {
+        return NOTES_FILE_PATH.toAbsolutePath();
+    }
+
+
 
     public static List<Note> getNotes(UUID uuid) {
         return notes.getOrDefault(uuid, Collections.emptyList());
