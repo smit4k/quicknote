@@ -68,10 +68,21 @@ public class NoteManager {
 
     public static Note addNote(UUID uuid, String message, double x, double y, double z, boolean includeTimestamp) {
         List<Note> userNotes = notes.computeIfAbsent(uuid, k -> new ArrayList<>());
-        int id = userNotes.size() + 1;
+        
+        // Find the next available ID that isn't already in use
+        int nextId = 1;
+        Set<Integer> usedIds = new HashSet<>();
+        for (Note note : userNotes) {
+            usedIds.add(note.id);
+        }
+        
+        while (usedIds.contains(nextId)) {
+            nextId++;
+        }
+        
         long timestamp = includeTimestamp ? System.currentTimeMillis() : 0;
 
-        Note note = new Note(id, message, x, y, z, timestamp);
+        Note note = new Note(nextId, message, x, y, z, timestamp);
         userNotes.add(note);
         save();
         return note;
@@ -90,5 +101,23 @@ public class NoteManager {
 
     public static List<Note> getNotes(UUID uuid) {
         return notes.getOrDefault(uuid, Collections.emptyList());
+    }
+    
+    public static boolean deleteNote(UUID uuid, int noteId) {
+        List<Note> userNotes = notes.get(uuid);
+        if (userNotes == null) {
+            return false;
+        }
+        
+        // Find the note with the specified ID
+        for (int i = 0; i < userNotes.size(); i++) {
+            if (userNotes.get(i).id == noteId) {
+                userNotes.remove(i);
+                save();
+                return true;
+            }
+        }
+        
+        return false;
     }
 }

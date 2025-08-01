@@ -37,6 +37,7 @@ public class QuickNote implements ModInitializer {
 			ClearNotesCommand.register(dispatcher);
 			ExportNotesCommand.register(dispatcher);
 			FilterNotesCommand.register(dispatcher);
+			DeleteNoteCommand.register(dispatcher);
 		});
 	}
 }
