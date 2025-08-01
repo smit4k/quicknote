@@ -28,6 +28,7 @@ public class QuickNote implements ModInitializer {
 			ViewNoteCommand.register(dispatcher);
 			ClearNotesCommand.register(dispatcher);
 			ExportNotesCommand.register(dispatcher);
+			FilterNotesCommand.register(dispatcher);
 		});
 	}
 }
