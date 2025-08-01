@@ -33,7 +33,7 @@ public class QuickNote implements ModInitializer {
 		
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			NoteCommand.register(dispatcher);
-			ViewNoteCommand.register(dispatcher);
+			ViewNotesCommand.register(dispatcher);
 			ClearNotesCommand.register(dispatcher);
 			ExportNotesCommand.register(dispatcher);
 			FilterNotesCommand.register(dispatcher);
