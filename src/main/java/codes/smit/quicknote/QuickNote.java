@@ -1,9 +1,11 @@
 package codes.smit.quicknote;
 
 import codes.smit.quicknote.command.*;
+import codes.smit.quicknote.data.NoteManager;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +24,13 @@ public class QuickNote implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		LOGGER.info("Hello Fabric world!");
+		LOGGER.info("Initializing QuickNote mod");
+		
+		// Initialize the NoteManager with the config directory
+		var configDir = FabricLoader.getInstance().getConfigDir().toFile();
+		NoteManager.init(configDir);
+		LOGGER.info("Notes will be saved to: " + NoteManager.getNotesFilePath());
+		
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			NoteCommand.register(dispatcher);
 			ViewNoteCommand.register(dispatcher);

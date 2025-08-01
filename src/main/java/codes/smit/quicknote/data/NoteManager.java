@@ -11,14 +11,30 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
 
+/**
+ * Manages player notes with persistence to disk.
+ * Notes are stored in JSON format in the config/quicknote directory.
+ * Notes are loaded on mod initialization and saved whenever they are modified.
+ */
+
 public class NoteManager {
     private static final Gson GSON = new Gson();
     private static Map<UUID, List<Note>> notes = new HashMap<>();
     private static File file;
-    private static final Path NOTES_FILE_PATH = Paths.get("config", "quicknote", "notes.json");
+    private static Path notesFilePath;
 
     public static void init(File configDir) {
-        file = new File(configDir, "notes.json");
+        // Create the quicknote directory if it doesn't exist
+        File quicknoteDir = new File(configDir, "quicknote");
+        if (!quicknoteDir.exists()) {
+            quicknoteDir.mkdirs();
+        }
+        
+        // Set up the file and path
+        file = new File(quicknoteDir, "notes.json");
+        notesFilePath = file.toPath();
+        
+        // Load existing notes
         load();
     }
 
@@ -34,8 +50,17 @@ public class NoteManager {
     }
 
     private static void save() {
-        try (FileWriter writer = new FileWriter(file)) {
-            GSON.toJson(notes, writer);
+        try {
+            // Ensure parent directory exists
+            File parentDir = file.getParentFile();
+            if (parentDir != null && !parentDir.exists()) {
+                parentDir.mkdirs();
+            }
+            
+            // Write the notes to the file
+            try (FileWriter writer = new FileWriter(file)) {
+                GSON.toJson(notes, writer);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,7 +83,7 @@ public class NoteManager {
     }
 
     public static Path getNotesFilePath() {
-        return NOTES_FILE_PATH.toAbsolutePath();
+        return notesFilePath;
     }
 
 
