@@ -36,11 +36,11 @@ public class ViewNotesCommand {
                         for (Note note : notes) {
                             String timestampStr = "";
                             if (note.timestamp != 0) {
-                                timestampStr = " (@ " + FORMATTER.format(Instant.ofEpochMilli(note.timestamp)) + ")";
+                                timestampStr = " (on " + FORMATTER.format(Instant.ofEpochMilli(note.timestamp)) + ")";
                             }
 
                             String coordsStr = (note.x != 0 || note.y != 0 || note.z != 0)
-                                    ? String.format(" at [%.1f, %.1f, %.1f]", note.x, note.y, note.z)
+                                    ? String.format(" @ [%.1f, %.1f, %.1f]", note.x, note.y, note.z)
                                     : "";
 
                             // Format tags if present

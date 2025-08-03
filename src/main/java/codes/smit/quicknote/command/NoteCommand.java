@@ -86,7 +86,7 @@ public class NoteCommand {
                             // Build feedback message
                             String reply = "📌 Note saved: \"" + cleanedMessage + "\"";
                             if (includeCoords.get()) {
-                                reply += String.format(" at [%.1f, %.1f, %.1f]", x, y, z);
+                                reply += String.format(" @ [%.1f, %.1f, %.1f]", x, y, z);
                             }
                             if (includeTimeStamp.get()) {
                                 reply += " (timestamp included)";
