@@ -56,10 +56,5 @@ public class ViewNotesCommand {
                     return 1;
                 })
         );
-
-        // Shortcut alias /vn
-        dispatcher.register(CommandManager.literal("vn")
-                .redirect(dispatcher.getRoot().getChild("viewnotes"))
-        );
     }
 }
