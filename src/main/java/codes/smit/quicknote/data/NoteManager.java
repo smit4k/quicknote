@@ -67,6 +67,10 @@ public class NoteManager {
     }
 
     public static Note addNote(UUID uuid, String message, double x, double y, double z, boolean includeTimestamp) {
+        return addNote(uuid, message, x, y, z, includeTimestamp, new ArrayList<>());
+    }
+    
+    public static Note addNote(UUID uuid, String message, double x, double y, double z, boolean includeTimestamp, List<String> tags) {
         List<Note> userNotes = notes.computeIfAbsent(uuid, k -> new ArrayList<>());
         
         // Find the next available ID that isn't already in use
@@ -82,7 +86,7 @@ public class NoteManager {
         
         long timestamp = includeTimestamp ? System.currentTimeMillis() : 0;
 
-        Note note = new Note(nextId, message, x, y, z, timestamp);
+        Note note = new Note(nextId, message, x, y, z, timestamp, tags);
         userNotes.add(note);
         save();
         return note;

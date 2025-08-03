@@ -43,12 +43,19 @@ public class ViewNotesCommand {
                                     ? String.format(" at [%.1f, %.1f, %.1f]", note.x, note.y, note.z)
                                     : "";
 
+                            // Format tags if present
+                            String tagsStr = "";
+                            if (note.tags != null && !note.tags.isEmpty()) {
+                                tagsStr = " [" + String.join(", ", note.tags.stream().map(tag -> "#" + tag).toList()) + "]";
+                            }
+                            
                             String line = String.format(
-                                    "#%d: \"%s\"%s%s",
+                                    "#%d: \"%s\"%s%s%s",
                                     note.id,
                                     note.message,
                                     timestampStr,
-                                    coordsStr
+                                    coordsStr,
+                                    tagsStr
                             );
                             source.sendFeedback(() -> Text.literal(line), false);
                         }

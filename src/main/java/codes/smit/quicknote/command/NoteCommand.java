@@ -15,6 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NoteCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
@@ -30,6 +32,29 @@ public class NoteCommand {
 
                             // Split message into tokens
                             List<String> tokens = new ArrayList<>(Arrays.asList(rawMessage.split("\\s+")));
+                            
+                            // Extract hashtags
+                            List<String> tags = new ArrayList<>();
+                            Pattern hashtagPattern = Pattern.compile("#(\\w+)");
+                            
+                            // Process each token to find hashtags
+                            for (int i = 0; i < tokens.size(); i++) {
+                                String token = tokens.get(i);
+                                Matcher matcher = hashtagPattern.matcher(token);
+                                
+                                if (matcher.matches()) {
+                                    // If the token is just a hashtag, add it to tags and remove from tokens
+                                    tags.add(matcher.group(1).toLowerCase());
+                                    tokens.remove(i);
+                                    i--; // Adjust index after removal
+                                } else if (token.contains("#")) {
+                                    // If the token contains a hashtag within it
+                                    matcher = hashtagPattern.matcher(token);
+                                    while (matcher.find()) {
+                                        tags.add(matcher.group(1).toLowerCase());
+                                    }
+                                }
+                            }
 
                             // Remove flags and set booleans
                             tokens.removeIf(token -> {
@@ -55,8 +80,8 @@ public class NoteCommand {
                                 z = pos.z;
                             }
 
-                            // Add note with optional timestamp
-                            NoteManager.addNote(uuid, cleanedMessage, x, y, z, includeTimeStamp.get());
+                            // Add note with optional timestamp and tags
+                            Note note = NoteManager.addNote(uuid, cleanedMessage, x, y, z, includeTimeStamp.get(), tags);
 
                             // Build feedback message
                             String reply = "📌 Note saved: \"" + cleanedMessage + "\"";
@@ -65,6 +90,9 @@ public class NoteCommand {
                             }
                             if (includeTimeStamp.get()) {
                                 reply += " (timestamp included)";
+                            }
+                            if (!tags.isEmpty()) {
+                                reply += " with tags: " + String.join(", ", tags.stream().map(tag -> "#" + tag).toList());
                             }
 
                             String finalReply = reply;
