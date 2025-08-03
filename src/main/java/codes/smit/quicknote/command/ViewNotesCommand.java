@@ -53,9 +53,9 @@ public class ViewNotesCommand {
                                     "#%d: \"%s\"%s%s%s",
                                     note.id,
                                     note.message,
-                                    timestampStr,
+                                    tagsStr,
                                     coordsStr,
-                                    tagsStr
+                                    timestampStr
                             );
                             source.sendFeedback(() -> Text.literal(line), false);
                         }
