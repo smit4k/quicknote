@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
 	"id": "quicknote",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"name": "quicknote",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Take notes in Minecraft quickly using the chat",
 	"authors": [
 		"smit4k"
 	],
