@@ -1,5 +1,5 @@
 # Quicknote
-A lightweight and intuitive Fabric mod designed to help you create, manage, and recall notes directly within your Minecraft world using simple chat commands. Never forget an important location, a crafting recipe, or a task again!
+A lightweight and intuitive Fabric mod designed to help you create, manage, and recall notes directly within your Minecraft world using simple chat commands.
 
 ## 🌟 Features
 - **Effortless Note Creation:** Quickly add new notes using a simple chat command.
@@ -14,8 +14,8 @@ A lightweight and intuitive Fabric mod designed to help you create, manage, and 
 
 ### Prerequisites
 - [Minecraft Java Edition](https://www.minecraft.net/en-us/download/alternative)
-- [Fabric Loader](https://fabricmc.net/use/installer/) (version `>=0.16.14`)
-- [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api) (version `0.128.1+1.21.5` or compatible)
+- [Fabric Loader](https://fabricmc.net/use/installer/)
+- [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 
 ### Steps
 1.  **Install Fabric Loader:** If you haven't already, download and run the Fabric installer for your Minecraft version (`1.21.5`).
