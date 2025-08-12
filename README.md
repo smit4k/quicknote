@@ -2,13 +2,10 @@
 A lightweight and intuitive Fabric mod designed to help you create, manage, and recall notes directly within your Minecraft world using simple chat commands.
 
 ## 🌟 Features
-- **Effortless Note Creation:** Quickly add new notes using a simple chat command.
-- **Tags:** Organize your notes with tags!
-- **Coordinates:** Add coordinates to your notes!
-- **Timestamps:** Add timestamps to your notes!
-- **Easy Retrieval:** View all your saved notes with a single command.
-- **Seamless Deletion:** Remove old or irrelevant notes with ease.
-- **Persistent Storage:** Notes are saved locally and persist across game sessions.
+- Note creation / deletion
+- Note filtering
+- Attach coordinates to notes
+- Attach timestamps to notes
 
 ## 🚀 Installation
 
@@ -18,7 +15,7 @@ A lightweight and intuitive Fabric mod designed to help you create, manage, and 
 - [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 
 ### Steps
-1.  **Install Fabric Loader:** If you haven't already, download and run the Fabric installer for your Minecraft version (`1.21.5`).
+1.  **Install Fabric Loader:** If you haven't already, download and run the Fabric installer for your Minecraft version (any `1.21.X` version).
 2.  **Download Quicknote:** Go to the [Releases](https://github.com/smit4k/quicknote/releases) page and download the latest `.jar` file for Quicknote.
 3.  **Place in Mods Folder:** Locate your Minecraft `mods` folder.
     *   **Windows:** Press `Win + R`, type `%appdata%\.minecraft\mods`, and press Enter.
@@ -26,21 +23,6 @@ A lightweight and intuitive Fabric mod designed to help you create, manage, and 
     *   **Linux:** Typically `~/.minecraft/mods`.
     Place the downloaded Quicknote `.jar` file into this `mods` folder.
 4.  **Launch Minecraft:** Start your Minecraft launcher and select the "fabric-loader" profile. Launch the game, and Quicknote will be active!
-
-## 🎮 Usage
-
-All commands are executed through the Minecraft chat. Press `T` to open the chat.
-
--   **Add a Note:** `/note <your note content>`
-    *   Example: `/note Remember to mine diamonds here -c`
--   **View All Notes:** `/viewnotes`
--   **Filter Notes:** `/filternotes -c` (shows notes with coordinates, can also do -t, -nc, -nt)
-    *   Example: `/note filter diamond` (shows notes containing "diamond")
--   **Delete a Note:** `/deletenote <note ID>`
-    *   Find the note ID by viewing all notes (`/viewnotes`).
-    *   Example: `/deletenote 5` (deletes the note with ID 5)
--   **Clear All Notes:** `/clearnotes`
--   **Export Notes:** `/exportnotes`
 
 ## 🛠️ Building from Source
 
