@@ -125,6 +125,22 @@ public class NoteManager {
         return false;
     }
 
+    public static boolean editNote(UUID uuid, int noteId, String newMessage) {
+        List<Note> userNotes = notes.get(uuid);
+        if (userNotes == null) {
+            return false;
+        }
+
+        for (Note note : userNotes) {
+            if (note.id == noteId) {
+                note.message = newMessage;
+                save();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static List<Note> searchNotes(UUID uuid, String query) {
         List<Note> userNotes = notes.getOrDefault(uuid, Collections.emptyList());
         List<Note> foundNotes = new ArrayList<>();
