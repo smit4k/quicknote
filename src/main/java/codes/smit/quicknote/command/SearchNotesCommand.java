@@ -20,7 +20,7 @@ public class SearchNotesCommand {
                     .withZone(ZoneId.systemDefault());
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        dispatcher.register(CommandManager.literal("search")
+        dispatcher.register(CommandManager.literal("searchnotes")
                 .then(CommandManager.argument("query", StringArgumentType.greedyString())
                         .executes(ctx -> {
                             ServerCommandSource source = ctx.getSource();
