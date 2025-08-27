@@ -124,4 +124,17 @@ public class NoteManager {
         
         return false;
     }
+
+    public static List<Note> searchNotes(UUID uuid, String query) {
+        List<Note> userNotes = notes.getOrDefault(uuid, Collections.emptyList());
+        List<Note> foundNotes = new ArrayList<>();
+        String lowerCaseQuery = query.toLowerCase();
+
+        for (Note note : userNotes) {
+            if (note.message.toLowerCase().contains(lowerCaseQuery)) {
+                foundNotes.add(note);
+            }
+        }
+        return foundNotes;
+    }
 }
